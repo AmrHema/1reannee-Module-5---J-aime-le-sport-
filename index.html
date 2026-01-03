@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BRAVO! en français</title>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700&family=Montserrat:wght@500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #ff9100;
+            --secondary: #1a73e8;
+            --bg: #f8f9fa;
+            --card-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        body {
+            font-family: 'Tajawal', sans-serif;
+            background-color: var(--bg);
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--primary), #fb8c00);
+            color: white;
+            padding: 2.5rem 1rem;
+            text-align: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        header h1 {
+            margin: 0;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 2.2rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 20px auto;
+            padding: 0 15px;
+        }
+
+        .category-block {
+            margin-bottom: 40px;
+        }
+
+        .category-header {
+            display: flex;
+            align-items: center;
+            background: white;
+            padding: 10px 20px;
+            border-radius: 15px;
+            border-right: 6px solid var(--primary);
+            margin-bottom: 20px;
+            box-shadow: var(--card-shadow);
+        }
+
+        .category-header h2 {
+            margin: 0;
+            font-size: 1.4rem;
+            color: var(--secondary);
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+            gap: 15px;
+        }
+
+        .card {
+            background: white;
+            padding: 18px;
+            border-radius: 12px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            box-shadow: var(--card-shadow);
+            border: 1px solid #eee;
+            position: relative;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary);
+        }
+
+        .card:active { transform: scale(0.95); }
+
+        .fr {
+            display: block;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            color: var(--secondary);
+            font-size: 1.1rem;
+            margin-bottom: 8px;
+            direction: ltr;
+        }
+
+        .ar {
+            display: block;
+            color: #666;
+            font-size: 0.95rem;
+        }
+
+        .voice-icon {
+            font-size: 0.8rem;
+            color: #ccc;
+            margin-top: 5px;
+            display: block;
+        }
+
+        @media (max-width: 600px) {
+            .grid { grid-template-columns: repeat(2, 1fr); }
+            header h1 { font-size: 1.6rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>BRAVO! en français</h1>
+        <p>1re année - Module 5 - Module 5</p>
+    </header>
+
+    <div class="container" id="content"></div>
+
+    <script>
+        // الكلمات مأخوذة من الصور الست المرفقة بالترتيب
+        const library = [
+            {
+                title: "Noms masculins (أسماء مذكرة)",
+                words: [
+                    ["un sport", "رياضة"], ["un sportif", "شخص رياضي"], ["un ballon", "كرة كبيرة"], ["un T-shirt", "تي شيرت"],
+                    ["un maillot", "قميص رياضي"], ["un survêtement", "بدلة تدريب"], ["un short", "شورت"], ["un match", "مباراة"],
+                    ["un drapeau", "علم"], ["un camarade", "زميل"], ["un adolescent", "شاب/مراهق"], ["un jeune", "شاب"],
+                    ["un frère", "أخ"], ["un chanteur", "مطرب/مغني"], ["un mécanicien", "ميكانيكي"], ["un homme", "رجل"],
+                    ["un enfant", "طفل"], ["le soir", "المساء"], ["un mélange", "خليط"], ["un ordinateur", "كمبيوتر"],
+                    ["un vélo", "دراجة"], ["un journal", "جريدة"], ["le théâtre", "المسرح"], ["le cinéma", "السينما"],
+                    ["le poisson", "السمك"], ["un voyage", "رحلة"], ["un vol", "رحلة طيران"], ["un loisir", "هواية"],
+                    ["un autocar", "أتوبيس سياحي"], ["le temps libre", "وقت الفراغ"], ["le numéro de téléphone", "رقم التليفون"], ["les goûts", "الميول"],
+                    ["les parents", "الوالدين"], ["les résultats", "النتائج"]
+                ]
+            },
+            {
+                title: "Noms féminins (أسماء مؤنثة)",
+                words: [
+                    ["une couleur", "لون"], ["une matière scolaire", "مادة دراسية"], ["une langue", "لغة"], ["une camarade", "زميلة"],
+                    ["une tenue de sport", "زي رياضي"], ["une chanteuse", "مطربة/مغنية"], ["une voiture", "سيارة"], ["une comptine", "أنشودة"],
+                    ["la télévision", "التليفزيون"], ["une femme", "امرأة"], ["une fois", "مرة"], ["une préférence", "تفضيل"],
+                    ["la musique", "الموسيقى"], ["une chanson", "أغنية"], ["la viande", "اللحمة"], ["une opération", "عملية حسابية"],
+                    ["des frites", "بطاطس محمرة"], ["des chaussettes", "جورب"], ["des baskets", "حذاء رياضي"], ["des chaussures de sport", "حذاء رياضي"]
+                ]
+            },
+            {
+                title: "Les sports (الألعاب الرياضية)",
+                words: [
+                    ["le football", "كرة القدم"], ["le basket", "كرة السلة"], ["le tennis", "التنس"], ["le judo", "الجودو"],
+                    ["le handball", "كرة اليد"], ["le volley-ball", "الكرة الطائرة"], ["le cyclisme", "ركوب الدراجات"], ["la natation", "السباحة"],
+                    ["la gymnastique", "التربية البدنية"], ["la boxe", "الملاكمة"], ["la danse", "الرقص"]
+                ]
+            },
+            {
+                title: "Les matières scolaires (المواد الدراسية)",
+                words: [
+                    ["l'anglais", "اللغة الإنجليزية"], ["le français", "اللغة الفرنسية"], ["l'arabe", "اللغة العربية"], ["la géographie", "الجغرافيا"],
+                    ["l'histoire", "التاريخ"], ["l'informatique", "الحاسب الآلي"], ["le dessin", "الرسم"], ["les mathématiques", "الرياضيات"],
+                    ["les sciences", "العلوم"]
+                ]
+            },
+            {
+                title: "Verbes (أفعال)",
+                words: [
+                    ["aimer", "يحب"], ["préférer", "يفضل"], ["adorer", "يعشق"], ["détester", "يكره"],
+                    ["exprimer", "يعبر عن"], ["étudier", "يدرس/يذاكر"], ["passer", "يقضي"], ["décrire", "يصف"],
+                    ["colorier", "يلون"], ["jouer", "يلعب"], ["peser", "يزن"], ["chanter", "يغني"],
+                    ["mélanger", "يخلط"], ["marcher", "يمشي"], ["voyager", "يسافر"], ["montrer", "يشير إلى"],
+                    ["parler", "يتكلم"], ["vérifier", "يتحقق"], ["deviner", "يخمن"], ["partir", "يرحل"], ["se prononcer", "يُنطق"]
+                ]
+            },
+            {
+                title: "Adj., adv., prép. et expressions (صفات وتعبيرات)",
+                words: [
+                    ["préféré", "مفضل"], ["super", "رائع"], ["précédent", "سابق"], ["cité", "مذكور"],
+                    ["maintenant", "الآن"], ["si", "لو/إذا"], ["entre", "بين"], ["mais", "لكن"],
+                    ["sans", "بدون"], ["sauf", "ماعدا"], ["sur le modèle", "وفقاً للنموذج"], ["en fonction des dessins", "وفقاً للرسومات"],
+                    ["les activités de loisirs", "أنشطة وقت الفراغ"], ["faire des jeux vidéo", "يلعب ألعاب فيديو"], ["faire une fête", "يقيم حفل"], ["faire du sport", "يمارس الرياضة"],
+                    ["faire du vélo", "يمارس ركوب الدراجات"], ["Il mesure un mètre", "يبلغ طوله متر"]
+                ]
+            }
+        ];
+
+        const contentDiv = document.getElementById('content');
+
+        function speak(text) {
+            window.speechSynthesis.cancel();
+            const msg = new SpeechSynthesisUtterance(text);
+            msg.lang = 'fr-FR';
+            window.speechSynthesis.speak(msg);
+        }
+
+        library.forEach(cat => {
+            const section = document.createElement('div');
+            section.className = 'category-block';
+            
+            section.innerHTML = `<div class="category-header"><h2>${cat.title}</h2></div>`;
+            
+            const grid = document.createElement('div');
+            grid.className = 'grid';
+
+            cat.words.forEach(w => {
+                const card = document.createElement('div');
+                card.className = 'card';
+                card.onclick = () => speak(w[0]);
+                card.innerHTML = `
+                    <span class="fr">${w[0]}</span>
+                    <span class="ar">${w[1]}</span>
+                    <span class="voice-icon">🔊 نطق</span>
+                `;
+                grid.appendChild(card);
+            });
+
+            section.appendChild(grid);
+            contentDiv.appendChild(section);
+        });
+    </script>
+</body>
+</html>
